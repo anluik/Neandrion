@@ -1,5 +1,5 @@
 {
-    "projectName": "Neandrion",
+    "projectName": "neandrion",
     "mode": "file-router",
     "typescript": true,
     "packageManager": "pnpm",
