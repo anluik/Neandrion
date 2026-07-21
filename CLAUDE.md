@@ -25,11 +25,12 @@ The layout's job is organizing and displaying components built for fun — some 
 
 Rules that keep styling unified:
 
-- All colors, shadows, and glows come from CSS custom properties defined in `src/styles.css` (`:root`, `:root[data-theme="dark"]`, and the `prefers-color-scheme` fallback block). Never hardcode colors inside components — add a token if one is missing.
-- Shared visual primitives (cards, nav links, kickers, animations) live as classes in `src/styles.css`; components combine them with Tailwind utilities.
+- All colors, shadows, glows and backdrop gradients come from the `:root` tokens in `src/styles.css`, each declared once as `light-dark(<day>, <dusk>)`. Never hardcode colors inside components — add a token if one is missing.
+- Styling is Tailwind utilities only — no CSS classes of our own, no inline `style`. `src/styles.css` holds four things: the `@theme` (fonts, `--animate-*`), the `@keyframes`, the `dark:` variant, and the tokens. Anything else belongs in a `className`.
+- Shared visual primitives are components, not classes: `GlowDot`, `GhostButton` in `src/components/`. They merge caller classes with `cn()` (`src/lib/utils.ts`), so overriding is plain Tailwind (`className="size-1.5"`) and never needs `!`. When a utility string repeats, reach for a component or a `Record<AccentName, string>` map before reaching for CSS.
 - New pages render inside the shared shell (`src/routes/__root.tsx` → `src/app/App.tsx`: collapsible sidebar "shelf" + scrollable main pane), so they inherit the frame automatically.
 - Experiments are registered in `src/experiments.ts` (index, title, group, status, route). The sidebar and home page both render from this registry — adding an entry there is how something appears in the app.
-- Write Tailwind classes in their canonical v4 form: important marker as a **suffix** (`size-2.25!`, not `!h-[9px]`); reference design tokens with the shorthand `(--token)` (e.g. `text-(--cyan)`, `bg-(--code-bg)`), not `[var(--token)]`; and prefer scale/named utilities (`gap-3.5`, `size-1.5`, `truncate`) over arbitrary values (`gap-[14px]`, `h-[6px] w-[6px]`) whenever an equivalent exists. `eslint-plugin-better-tailwindcss` enforces and autofixes this on `pnpm format` — arbitrary `[…]` values are fine only when no canonical equivalent exists (e.g. `text-[clamp(…)]`, `[animation-delay:2.4s]`).
+- Write Tailwind classes in their canonical v4 form: important marker as a **suffix** (`size-2.25!`, not `!h-[9px]`); reference design tokens with the shorthand `(--token)` (e.g. `text-(--cyan)`, `bg-(image:--sky)`), not `[var(--token)]`; and prefer scale/named utilities (`gap-3.5`, `size-1.5`, `truncate`) over arbitrary values (`gap-[14px]`, `h-[6px] w-[6px]`) whenever an equivalent exists. `eslint-plugin-better-tailwindcss` enforces and autofixes this on `pnpm format` — arbitrary `[…]` values are fine only when no canonical equivalent exists (e.g. `text-[clamp(…)]`, `[animation-delay:2.4s]`).
 
 The implemented look comes from the `HomeScene` design in the "Neandrion Design System" project on claude.ai/design (project id `095af710-c352-4292-a59b-770d8f528ce4`) — consult it before redesigning the shell or home page.
 
@@ -54,7 +55,7 @@ The implemented look comes from the `HomeScene` design in the "Neandrion Design 
 - `src/routes/` holds only thin TanStack Router route files: route config plus an imported view component. No UI code in route files.
 - `src/routes/__root.tsx` only configures the app — the document shell (`<head>`, body classes), the pre-hydration theme script, global contexts/providers, devtools — and calls the app entry point. It builds no layout itself.
 - `src/app/` is the application package: `App.tsx` is the entry point that builds the layout; layout-only components live beside it in dedicated subfolders (e.g. `src/app/sidebar/`).
-- Each view/page lives in its own dedicated package under `src/views/<view>/` (e.g. `src/views/home/`), containing its main `<Name>View.tsx` and its private subcomponents, grouped in subfolders where helpful (e.g. `src/views/home/exhibits/`).
+- Each view/page lives in its own dedicated package under `src/views/<view>/` (e.g. `src/views/home/`), containing its main `<Name>View.tsx` and its private subcomponents, grouped in subfolders where helpful.
 - `src/components/` is only for components genuinely shared across packages; `src/hooks/` for shared hooks.
 - Imports: use the `#/` alias when importing across packages, relative paths within a package.
 - Use direct type imports instead of accessing types via namespace (e.g. React.ReactNode vs ReactNode + type import) unless 3 or more types have been imported from the same namespace in one file.
@@ -63,6 +64,11 @@ The implemented look comes from the `HomeScene` design in the "Neandrion Design 
 ## Theming mechanics
 
 Theme is resolved before hydration by an inline script in `__root.tsx` (localStorage `theme` = `light` | `dark`, falling back to `prefers-color-scheme` when unset), which sets `data-theme` on `<html>` and `color-scheme`. `ThemeToggle` switches between the two. Keep this mechanism when changing styles.
+
+Two things read that state, so neither needs a duplicated block of values:
+
+- **Colors** — `light-dark()` resolves against `color-scheme`, which `styles.css` binds to `data-theme` (and leaves as `light dark` when unset, so no-JS follows the OS). Those three `color-scheme` rules are load-bearing: Lightning CSS polyfills `light-dark()` off them, and without them a build would silently follow only the OS preference.
+- **Everything else** (a swapped label, a different display) — the `dark:` variant, redefined in `styles.css` to key off `data-theme` with a `prefers-color-scheme` fallback: `hidden dark:inline`.
 
 ## Conventions for new experiments
 

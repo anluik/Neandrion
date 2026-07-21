@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
+import GhostButton from "#/components/GhostButton";
 import ThemeToggle from "#/components/ThemeToggle";
 import { experimentGroups } from "#/experiments";
 import Logo from "../../components/Logo.tsx";
@@ -27,16 +28,15 @@ export default function Shelf({
                         Neandrion
                     </span>
                 </Link>
-                <button
+                <GhostButton
                     ref={closeRef}
-                    type="button"
                     onClick={onDismiss}
                     title="Close menu"
                     aria-label="Close menu"
-                    className="flex cursor-pointer items-center rounded-lg border border-(--line) p-1.5 text-(--t2) transition-all duration-250 hover:border-(--cyan) hover:text-(--cyan) hover:shadow-(--glow-c) md:hidden"
+                    className="p-1.5 md:hidden"
                 >
                     <X className="size-4" aria-hidden />
-                </button>
+                </GhostButton>
             </div>
 
             <nav
@@ -56,7 +56,7 @@ export default function Shelf({
                 <Link
                     to="/about"
                     onClick={onDismiss}
-                    className="rounded-lg px-2 py-1.5 text-[13px] font-semibold text-(--t2) transition-all duration-250 hover:text-(--cyan) hover:[text-shadow:0_0_12px_var(--cyan)]"
+                    className="rounded-lg px-2 py-1.5 text-[13px] font-semibold text-(--text-dim) transition-all duration-250 hover:text-(--cyan) hover:[text-shadow:0_0_12px_var(--cyan)]"
                 >
                     About
                 </Link>

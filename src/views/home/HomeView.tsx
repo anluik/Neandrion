@@ -13,13 +13,13 @@ export default function HomeView() {
                 <h1 className="font-display mx-0 mb-0 mt-4.5 max-w-[14ch] text-balance text-[clamp(38px,6vw,64px)] font-bold leading-[1.04] tracking-[-0.015em]">
                     One beach, many experiments.
                 </h1>
-                <p className="mb-0 mt-4.5 max-w-[50ch] text-pretty text-[16.5px] leading-[1.65] text-(--t2)">
+                <p className="mb-0 mt-4.5 max-w-[50ch] text-pretty text-[16.5px] leading-[1.65] text-(--text-dim)">
                     Everything on the shelf is a small experiment in frontend
                     technique — animations, hooks, and interaction patterns,
                     each living on its own page. The horizon behind this text is
                     one of them.
                 </p>
-                <div className="mt-6.5 flex items-center gap-2.5 font-mono text-xs tracking-widest text-(--t2)">
+                <div className="mt-6.5 flex items-center gap-2.5 font-mono text-xs tracking-widest text-(--text-dim)">
                     <span className="text-(--amber)">←</span>
                     <span>pick one from the shelf and start poking</span>
                 </div>

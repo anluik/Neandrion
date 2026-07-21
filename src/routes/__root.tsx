@@ -49,7 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <title>Neandrion</title>
                 <HeadContent />
             </head>
-            <body className="bg-(--bg0) text-(--t1) antialiased transition-colors duration-500 selection:bg-(--magenta-soft) wrap-anywhere">
+            <body className="bg-(--bg) text-(--text) antialiased transition-colors duration-500 selection:bg-(--magenta-soft) wrap-anywhere">
                 <App>{children}</App>
                 <Devtools />
                 <Scripts />

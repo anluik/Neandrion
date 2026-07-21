@@ -23,12 +23,6 @@ export const statusAccent: Record<ExperimentStatus, AccentName> = {
     idea: "magenta"
 };
 
-export const accentText: Record<AccentName, string> = {
-    magenta: "text-(--magenta)",
-    cyan: "text-(--cyan)",
-    amber: "text-(--amber)"
-};
-
 /*
  * The shelf. Everything except #004 is a placeholder from the design until
  * the real experiment is built — give an entry a `to` route when it goes live.

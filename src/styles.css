@@ -60,40 +60,64 @@
     }
 }
 
+:root[data-theme="light"] {
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+}
+
 /*
  * Sunset-beach-club tokens (design source: HomeScene in the Neandrion
- * Design System project on claude.ai/design). Light = the beach at golden
- * hour ("DAY"), dark = the party after sundown ("DUSK", flagship).
+ * Design System project on claude.ai/design), each declared once as
+ * light-dark(<the beach at golden hour>, <the party after sundown>).
  */
 :root {
-    --bg0: oklch(0.955 0.018 78);
-    --bg-top: oklch(0.92 0.038 50);
-    --bg-ember: oklch(0.87 0.07 40 / 0.65);
-    --s1: oklch(0.985 0.01 82);
-    --s2: oklch(0.998 0.004 85);
-    --line: oklch(0.78 0.045 60 / 0.6);
-    --t1: oklch(0.27 0.045 300);
-    --t2: oklch(0.47 0.04 315);
-    --magenta: oklch(0.56 0.23 350);
-    --cyan: oklch(0.52 0.11 205);
-    --amber: oklch(0.58 0.14 45);
-    --magenta-soft: oklch(0.56 0.23 350 / 0.12);
-    --cyan-soft: oklch(0.52 0.11 205 / 0.12);
-    --amber-soft: oklch(0.58 0.14 45 / 0.13);
-    --glow-m: 0 0 22px oklch(0.62 0.22 350 / 0.35);
-    --glow-c: 0 0 22px oklch(0.6 0.12 205 / 0.35);
-    --glow-a: 0 0 22px oklch(0.65 0.14 45 / 0.4);
-    --side-bg: oklch(0.93 0.025 70);
-    --code-bg: oklch(0.92 0.022 75);
-    --scrim: oklch(0.45 0.06 45 / 0.35);
+    color-scheme: light dark;
+
+    --bg: light-dark(oklch(0.955 0.018 78), oklch(0.19 0.055 284));
+    --bg-top: light-dark(oklch(0.92 0.038 50), oklch(0.145 0.05 270));
+    --bg-ember: light-dark(
+        oklch(0.87 0.07 40 / 0.65),
+        oklch(0.38 0.1 30 / 0.55)
+    );
+    --surface: light-dark(oklch(0.985 0.01 82), oklch(0.235 0.05 286));
+    --side-bg: light-dark(oklch(0.93 0.025 70), oklch(0.165 0.045 282));
+    --scrim: light-dark(oklch(0.45 0.06 45 / 0.35), oklch(0.12 0.05 285 / 0.6));
+    --line: light-dark(oklch(0.78 0.045 60 / 0.6), oklch(0.55 0.06 295 / 0.28));
+    --text: light-dark(oklch(0.27 0.045 300), oklch(0.95 0.015 85));
+    --text-dim: light-dark(oklch(0.47 0.04 315), oklch(0.73 0.035 290));
+
+    --magenta: light-dark(oklch(0.56 0.23 350), oklch(0.72 0.23 350));
+    --cyan: light-dark(oklch(0.52 0.11 205), oklch(0.8 0.13 195));
+    --amber: light-dark(oklch(0.58 0.14 45), oklch(0.78 0.14 55));
+    --magenta-soft: light-dark(
+        oklch(0.56 0.23 350 / 0.12),
+        oklch(0.72 0.23 350 / 0.14)
+    );
+    --cyan-soft: light-dark(
+        oklch(0.52 0.11 205 / 0.12),
+        oklch(0.8 0.13 195 / 0.14)
+    );
+    --amber-soft: light-dark(
+        oklch(0.58 0.14 45 / 0.13),
+        oklch(0.78 0.14 55 / 0.14)
+    );
+    --glow-magenta: 0 0 22px
+        light-dark(oklch(0.62 0.22 350 / 0.35), oklch(0.72 0.23 350 / 0.42));
+    --glow-cyan: 0 0 22px
+        light-dark(oklch(0.6 0.12 205 / 0.35), oklch(0.8 0.13 195 / 0.42));
+    --glow-amber: 0 0 22px
+        light-dark(oklch(0.65 0.14 45 / 0.4), oklch(0.78 0.14 55 / 0.42));
 
     /* Backdrop layers, painted with `bg-(image:--sky)` and friends. Theme
      * independent: they either read the tokens above or sit on top of them. */
     --sky: linear-gradient(
         180deg,
         var(--bg-top) 0%,
-        var(--bg0) 58%,
-        var(--bg0) 100%
+        var(--bg) 58%,
+        var(--bg) 100%
     );
     --ember: radial-gradient(
         70% 120% at 62% 112%,
@@ -111,52 +135,4 @@
         transparent
     );
     --grain: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/%3E%3C/filter%3E%3Crect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22 opacity=%220.6%22/%3E%3C/svg%3E");
-}
-
-:root[data-theme="dark"] {
-    --bg0: oklch(0.19 0.055 284);
-    --bg-top: oklch(0.145 0.05 270);
-    --bg-ember: oklch(0.38 0.1 30 / 0.55);
-    --s1: oklch(0.235 0.05 286);
-    --s2: oklch(0.285 0.05 288);
-    --line: oklch(0.55 0.06 295 / 0.28);
-    --t1: oklch(0.95 0.015 85);
-    --t2: oklch(0.73 0.035 290);
-    --magenta: oklch(0.72 0.23 350);
-    --cyan: oklch(0.8 0.13 195);
-    --amber: oklch(0.78 0.14 55);
-    --magenta-soft: oklch(0.72 0.23 350 / 0.14);
-    --cyan-soft: oklch(0.8 0.13 195 / 0.14);
-    --amber-soft: oklch(0.78 0.14 55 / 0.14);
-    --glow-m: 0 0 22px oklch(0.72 0.23 350 / 0.42);
-    --glow-c: 0 0 22px oklch(0.8 0.13 195 / 0.42);
-    --glow-a: 0 0 22px oklch(0.78 0.14 55 / 0.42);
-    --side-bg: oklch(0.165 0.045 282);
-    --code-bg: oklch(0.155 0.045 280);
-    --scrim: oklch(0.12 0.05 285 / 0.6);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg0: oklch(0.19 0.055 284);
-        --bg-top: oklch(0.145 0.05 270);
-        --bg-ember: oklch(0.38 0.1 30 / 0.55);
-        --s1: oklch(0.235 0.05 286);
-        --s2: oklch(0.285 0.05 288);
-        --line: oklch(0.55 0.06 295 / 0.28);
-        --t1: oklch(0.95 0.015 85);
-        --t2: oklch(0.73 0.035 290);
-        --magenta: oklch(0.72 0.23 350);
-        --cyan: oklch(0.8 0.13 195);
-        --amber: oklch(0.78 0.14 55);
-        --magenta-soft: oklch(0.72 0.23 350 / 0.14);
-        --cyan-soft: oklch(0.8 0.13 195 / 0.14);
-        --amber-soft: oklch(0.78 0.14 55 / 0.14);
-        --glow-m: 0 0 22px oklch(0.72 0.23 350 / 0.42);
-        --glow-c: 0 0 22px oklch(0.8 0.13 195 / 0.42);
-        --glow-a: 0 0 22px oklch(0.78 0.14 55 / 0.42);
-        --side-bg: oklch(0.165 0.045 282);
-        --code-bg: oklch(0.155 0.045 280);
-        --scrim: oklch(0.12 0.05 285 / 0.6);
-    }
 }

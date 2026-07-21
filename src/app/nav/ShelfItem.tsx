@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { accentText, statusAccent } from "#/experiments";
+import GlowDot from "#/components/GlowDot";
+import { statusAccent } from "#/experiments";
 import type { AccentName, Experiment, ExperimentGroup } from "#/experiments";
 
 const link =
@@ -23,13 +24,14 @@ export default function ShelfItem({
 }) {
     const content = (
         <>
-            <span className="w-7.5 shrink-0 font-mono text-[10.5px] font-semibold tracking-[0.06em] text-(--t2)">
+            <span className="w-7.5 shrink-0 font-mono text-[10.5px] font-semibold tracking-[0.06em] text-(--text-dim)">
                 {item.index}
             </span>
             <span className="min-w-0 flex-1 truncate">{item.title}</span>
-            <span
+            <GlowDot
+                accent={statusAccent[item.status]}
                 title={item.status}
-                className={`inline-block size-1.5 shrink-0 rounded-full bg-current shadow-[0_0_8px_currentColor] ${accentText[statusAccent[item.status]]}`}
+                className="size-1.5"
             />
         </>
     );

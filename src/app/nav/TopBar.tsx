@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import { useEffect, useRef } from "react";
+import GhostButton from "#/components/GhostButton";
 import ThemeToggle from "#/components/ThemeToggle.tsx";
 import Logo from "#/components/Logo.tsx";
 
@@ -34,17 +35,16 @@ export default function TopBar({
                 </span>
             </Link>
             <ThemeToggle />
-            <button
+            <GhostButton
                 ref={buttonRef}
-                type="button"
                 onClick={onToggle}
                 aria-label="Open menu"
                 aria-expanded={open}
                 aria-controls="shelf"
-                className="flex cursor-pointer items-center rounded-lg border border-(--line) p-1.5 text-(--t2) transition-all duration-250 hover:border-(--cyan) hover:text-(--cyan) hover:shadow-(--glow-c)"
+                className="p-1.5"
             >
                 <Menu className="size-4.5" aria-hidden />
-            </button>
+            </GhostButton>
         </header>
     );
 }
