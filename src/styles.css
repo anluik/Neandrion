@@ -34,7 +34,6 @@
     --side-bg: oklch(0.93 0.025 70);
     --code-bg: oklch(0.92 0.022 75);
     --scrim: oklch(0.45 0.06 45 / 0.35);
-    --logo-ink: oklch(0.99 0.01 80);
 }
 
 :root[data-theme="dark"] {
@@ -216,22 +215,16 @@ pre code {
 .accent-magenta {
     --grp-c: var(--magenta);
     --grp-bg: var(--magenta-soft);
-    --exh-c: var(--magenta);
-    --exh-glow: var(--glow-m);
 }
 
 .accent-cyan {
     --grp-c: var(--cyan);
     --grp-bg: var(--cyan-soft);
-    --exh-c: var(--cyan);
-    --exh-glow: var(--glow-c);
 }
 
 .accent-amber {
     --grp-c: var(--amber);
     --grp-bg: var(--amber-soft);
-    --exh-c: var(--amber);
-    --exh-glow: var(--glow-a);
 }
 
 .shelf-link {
@@ -341,42 +334,6 @@ pre code {
     background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/%3E%3C/filter%3E%3Crect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22 opacity=%220.6%22/%3E%3C/svg%3E");
 }
 
-.float-y {
-    animation: ns-float var(--float-dur, 8s) ease-in-out var(--float-delay, 0s)
-        infinite;
-}
-
-.exhibit-card {
-    background: var(--s1);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    transition: all 0.25s ease;
-}
-
-.exhibit-card:hover,
-a:hover > .exhibit-card {
-    border-color: var(--exh-c, var(--cyan));
-    box-shadow: var(--exh-glow, var(--glow-c));
-}
-
-.stagger-line {
-    height: 7px;
-    border-radius: 4px;
-    background: var(--magenta-soft);
-    animation: ns-cascade 3.6s ease var(--line-delay, 0s) infinite;
-}
-
-.beat-bar {
-    width: 6px;
-    height: 34px;
-    border-radius: 3px;
-    transform-origin: bottom;
-    background: var(--bar-c);
-    box-shadow: 0 0 8px var(--bar-c);
-    animation: ns-bar var(--bar-dur, 1s) ease-in-out var(--bar-delay, 0s)
-        infinite;
-}
-
 .panel {
     background: var(--s1);
     border: 1px solid var(--line);
@@ -402,58 +359,6 @@ a:hover > .exhibit-card {
     }
 }
 
-@keyframes ns-float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes ns-bar {
-    0%,
-    100% {
-        transform: scaleY(0.35);
-    }
-    50% {
-        transform: scaleY(1);
-    }
-}
-
-@keyframes ns-slide {
-    0%,
-    42% {
-        transform: translateX(0);
-    }
-    50%,
-    92% {
-        transform: translateX(46px);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-@keyframes ns-cascade {
-    0%,
-    10% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    22%,
-    78% {
-        opacity: 1;
-        transform: none;
-    }
-    90%,
-    100% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-}
-
 @keyframes ns-drift {
     0%,
     100% {
@@ -476,7 +381,6 @@ a:hover > .exhibit-card {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .float-y,
     .bloom,
     .stage-sky,
     .rise-in {
